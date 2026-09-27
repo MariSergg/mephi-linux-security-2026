@@ -1,0 +1,49 @@
+    1  sudo useradd user1
+    2  getent passwd user1
+    3  ls -ld /home/user1
+    4  sudo usermod -u 1234 user1
+    5  id user1
+    6  sudo groupadd students
+    7  getent group students
+    8  sudo usermod -aG students user1
+    9  id user1
+   10  getent group students
+   11  sudo passwd user1
+   12  sudo chage -M 90 user1
+   13  sudo chage -l user1
+   14  stat /home/user1
+   15  sudo find / -type f -perm -4000 2>/dev/null
+   16  sudo find / -type f -perm -4000 2>/dev/null > ~/suid-files.out
+   17  cat ~/suid-files.out
+   18  ps -eo pid,ruid,euid,comm | awk 'NR==1 || ($2>=1000 && $2<=60000 && $3==0)'
+   19  ps -eo pid,ruid,euid,comm | awk 'NR==1 || ($2>=1000 && $2<=60000 && $3==0)' > ~/processes-root-euid.out
+   20  cat ~/processes-root-euid.out
+   21  su - user1 -c 'touch /root/setuid-test'
+   22  sudo cp /usr/bin/touch /home/user1/touch-suid
+   23  sudo chmod u+s /home/user1/touch-suid
+   24  sudo ls -l /home/user1/touch-suid
+   25  su - user1 -c '/home/user1/touch-suid /root/setuid-test'
+   26  sudo ls -l /root/setuid-test
+   27  su - user1 -c 'cat /etc/shadow'
+   28  sudo cp /usr/bin/cat /home/user1/cat-cap
+   29  sudo ls -l /home/user1/cat-cap
+   30  sudo setcap cap_dac_read_search=ep /home/user1/cat-cap
+   31  sudo getcap /home/user1/cat-cap
+   32  su - user1 -c '/home/user1/cat-cap /etc/shadow'
+   33  sudo visudo
+   34  sudo visudo -c
+   35  sudo -l -U user1
+   36  sudo grep -n '^user1' /etc/sudoers
+   37  sudo visudo
+   38  sudo visudo -c
+   39  sudo -l -U user1
+   40  date
+   41  su - user1
+   42  echo 374874
+   43  gnome-screenshot -f ~/mephi-screenshot.png
+   44  rm ~/mephi-screenshot.png
+   45  clear
+   46  echo 374874
+   47  gnome-screenshot -f ~/mephi-screenshot.png
+   48  ls -l ~/mephi-screenshot.png
+   49  history > ~/history.out
